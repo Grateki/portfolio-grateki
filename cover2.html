@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anna | UX Engineer Portfolio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* === DESIGN SYSTEM === */
+
+      /* Typography - FiraCode Nerd Font */
+      @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        /* Color Palette - Modern Gray & Purple */
+        --color-light: #ffffff;
+        --color-gray-100: #f8fafc;
+        --color-gray-200: #e2e8f0;
+        --color-gray-300: #cbd5e1;
+        --color-gray-400: #94a3b8;
+        --color-gray-500: #64748b;
+        --color-gray-600: #475569;
+        --color-gray-700: #374151;
+        --color-gray-800: #1f2937;
+        --color-gray-900: #111827;
+
+        --color-primary: #8b5cf6;
+        --color-primary-dark: #7c3aed;
+        --color-primary-light: #a78bfa;
+        --color-secondary: #c4b5fd;
+        --color-accent: #6366f1;
+        --color-success: #10b981;
+        --color-warning: #f59e0b;
+        --color-error: #ef4444;
+        --color-background: #000000;
+        --color-background-alt: #111827;
+
+        /* Spacing System */
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-2xl: 3rem;
+        --space-3xl: 5rem;
+
+        /* Border Radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+        --radius-2xl: 24px;
+        --radius-full: 9999px;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+        /* Transitions */
+        --transition-fast: 150ms ease;
+        --transition-normal: 300ms ease;
+        --transition-slow: 500ms ease;
+
+        /* Z-index scale */
+        --z-base: 1;
+        --z-above: 10;
+        --z-modal: 100;
+        --z-tooltip: 500;
+      }
+
+      html {
+        font-family: "Fira Code", monospace;
+        background-color: #000000;
+      }
+
+      body {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .monospace {
+        font-family: "Fira Code", monospace;
+      }
+
+      /* Container styles */
+      .container-custom {
+        width: 100%;
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+      }
+
+      @media (max-width: 768px) {
+        .container-custom {
+          padding-left: var(--space-md);
+          padding-right: var(--space-md);
+        }
+      }
+
+      /* Mobile navigation */
+      .mobile-nav {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--color-background);
+        z-index: 1000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .mobile-nav.active {
+        display: flex;
+      }
+
+      .mobile-nav a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--color-light);
+        text-decoration: none;
+        transition: color var(--transition-normal);
+      }
+
+      .mobile-nav a:hover {
+        color: var(--color-primary-light);
+      }
+
+      /* Custom animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn var(--transition-normal) forwards;
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary),
+          var(--color-secondary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--color-background-alt);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-gray-600);
+        border-radius: var(--radius-full);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-primary);
+      }
+
+      /* Accessibility improvements */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--color-primary);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: var(--radius-md);
+        z-index: 1000;
+        transition: top var(--transition-fast);
+      }
+
+      .skip-link:focus {
+        top: 6px;
+      }
+
+      /* Focus styles for accessibility */
+      *:focus {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+
+      button:focus-visible,
+      a:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        :root {
+          --color-primary: #a78bfa;
+          --color-background: #000000;
+          --color-background-alt: #1a1a1a;
+        }
+      }
+
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Button styles */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius-lg);
+        font-weight: 600;
+        transition: all var(--transition-normal);
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--color-primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--color-primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+      }
+
+      /* Card styles */
+      .card {
+        background-color: var(--color-gray-800);
+        border: 1px solid var(--color-gray-700);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+        transition: transform var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+        border-color: var(--color-primary);
+      }
+
+      /* Tag styles */
+      .tag {
+        display: inline-block;
+        background-color: var(--color-gray-800);
+        color: var(--color-gray-200);
+        padding: 0.375rem 0.875rem;
+        border-radius: var(--radius-full);
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid var(--color-gray-700);
+        transition: all var(--transition-fast);
+      }
+
+      .tag:hover {
+        background-color: var(--color-gray-700);
+        border-color: var(--color-primary);
+      }
+
+      .tag-primary {
+        background-color: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+      }
+
+      .tag-secondary {
+        background-color: var(--color-secondary);
+        color: var(--color-gray-900);
+        border-color: var(--color-secondary);
+      }
+
+      /* Divider */
+      .divider {
+        height: 1px;
+        width: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--color-gray-700),
+          transparent
+        );
+        margin: var(--space-xl) 0;
+      }
+
+      /* Glassmorphism */
+      .glass {
+        background: rgba(17, 24, 39, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+      }
+
+      /* Language Selector */
+      .lang-selector {
+        position: relative;
+        display: inline-block;
+      }
+
+      .lang-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--color-gray-800);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-sm);
+        min-width: 120px;
+        z-index: 1000;
+      }
+
+      .lang-selector:hover .lang-dropdown {
+        display: block;
+      }
+
+      .lang-option {
+        display: block;
+        padding: var(--space-sm);
+        color: var(--color-light);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition: background-color var(--transition-fast);
+      }
+
+      .lang-option:hover {
+        background-color: var(--color-primary);
+      }
+
+      .lang-option.active {
+        background-color: var(--color-primary-dark);
+      }
+
+      /* Hidden content for language switching */
+      [data-lang]:not([data-lang="pt-br"]) {
+        display: none;
+      }
+
+      html[lang="en"] [data-lang]:not([data-lang="en"]) {
+        display: none;
+      }
+
+      html[lang="en"] [data-lang="en"] {
+        display: block;
+      }
+
+      html[lang="pt-BR"] [data-lang="pt-br"] {
+        display: block;
+      }
+
+      /* Responsive typography */
+      @media (max-width: 768px) {
+        .responsive-text-4xl {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+
+        .responsive-text-3xl {
+          font-size: 1.75rem;
+          line-height: 2.25rem;
+        }
+
+        .responsive-text-2xl {
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
+      }
+
+      /* Responsive spacing */
+      @media (max-width: 768px) {
+        .responsive-py-20 {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+
+        .responsive-mb-16 {
+          margin-bottom: 2rem;
+        }
+
+        .responsive-gap-8 {
+          gap: 1rem;
+        }
+      }
+    </style>
+    <script>
+      // Language switching functionality
+      function switchLanguage(lang) {
+        document.documentElement.lang = lang;
+        localStorage.setItem("preferred-language", lang);
+
+        // Update active language in dropdown
+        document.querySelectorAll(".lang-option").forEach((option) => {
+          option.classList.remove("active");
+        });
+        document
+          .querySelector(`[data-lang-option="${lang}"]`)
+          .classList.add("active");
+      }
+
+      // Load saved language preference
+      document.addEventListener("DOMContentLoaded", function () {
+        const savedLang = localStorage.getItem("preferred-language") || "pt-BR";
+        switchLanguage(savedLang);
+      });
+
+      // Mobile menu functionality
+      function toggleMobileMenu() {
+        const mobileNav = document.getElementById("mobile-nav");
+        const menuIcon = document.getElementById("menu-icon");
+        const closeIcon = document.getElementById("close-icon");
+
+        mobileNav.classList.toggle("active");
+
+        if (mobileNav.classList.contains("active")) {
+          menuIcon.style.display = "none";
+          closeIcon.style.display = "block";
+          document.body.style.overflow = "hidden";
+        } else {
+          menuIcon.style.display = "block";
+          closeIcon.style.display = "none";
+          document.body.style.overflow = "auto";
+        }
+      }
+
+      function closeMobileMenu() {
+        const mobileNav = document.getElementById("mobile-nav");
+        const menuIcon = document.getElementById("menu-icon");
+        const closeIcon = document.getElementById("close-icon");
+
+        mobileNav.classList.remove("active");
+        menuIcon.style.display = "block";
+        closeIcon.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+    </script>
+  </head>
+  <body class="bg-[var(--color-background)] text-[var(--color-light)]">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">
+      <span data-lang="pt-br">Pular para o conteúdo principal</span>
+      <span data-lang="en">Skip to main content</span>
+    </a>
+
+    <!-- Header/Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass py-4" role="banner">
+      <div class="container-custom flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-[var(--color-light)]">
+          <span class="gradient-text">Anna Grateki</span>
+        </a>
+
+        <nav
+          class="hidden md:flex space-x-8"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <a
+            href="#"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Home</span>
+            <span data-lang="en">Home</span>
+          </a>
+          <a
+            href="#about"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Sobre</span>
+            <span data-lang="en">About</span>
+          </a>
+          <a
+            href="#experience"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Experiência</span>
+            <span data-lang="en">Experience</span>
+          </a>
+          <a
+            href="#skills"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Skills</span>
+            <span data-lang="en">Skills</span>
+          </a>
+          <a
+            href="#projects"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Projetos</span>
+            <span data-lang="en">Projects</span>
+          </a>
+          <a
+            href="designsystem.html"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Design System</span>
+            <span data-lang="en">Design System</span>
+          </a>
+          <a
+            href="#contact"
+            class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors"
+          >
+            <span data-lang="pt-br">Contato</span>
+            <span data-lang="en">Contact</span>
+          </a>
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <!-- Language Selector -->
+          <div class="lang-selector">
+            <button
+              class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors flex items-center"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-1"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                ></path>
+              </svg>
+              <span data-lang="pt-br">PT</span>
+              <span data-lang="en">EN</span>
+            </button>
+            <div class="lang-dropdown">
+              <a
+                href="#"
+                data-lang-option="pt-BR"
+                onclick="switchLanguage('pt-BR')"
+                class="lang-option active"
+                >🇧🇷 pt</a
+              >
+              <a
+                href="#"
+                data-lang-option="en"
+                onclick="switchLanguage('en')"
+                class="lang-option"
+                >🇺🇸 en</a
+              >
+            </div>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="md:hidden text-[var(--color-light)] z-50 relative"
+            onclick="toggleMobileMenu()"
+          >
+            <svg
+              id="menu-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+            <svg
+              id="close-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="display: none"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <div id="mobile-nav" class="mobile-nav">
+        <a href="#" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Home</span>
+          <span data-lang="en">Home</span>
+        </a>
+        <a href="#about" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Sobre</span>
+          <span data-lang="en">About</span>
+        </a>
+        <a href="#experience" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Experiência</span>
+          <span data-lang="en">Experience</span>
+        </a>
+        <a href="#skills" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Skills</span>
+          <span data-lang="en">Skills</span>
+        </a>
+        <a href="#projects" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Projetos</span>
+          <span data-lang="en">Projects</span>
+        </a>
+        <a href="designsystem.html" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Design System</span>
+          <span data-lang="en">Design System</span>
+        </a>
+        <a href="#contact" onclick="closeMobileMenu()">
+          <span data-lang="pt-br">Contato</span>
+          <span data-lang="en">Contact</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main id="main-content">
+      <section
+        class="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-6 lg:px-8 pt-24 animate-fadeIn"
+        style="animation-delay: 0s"
+        role="banner"
+        aria-labelledby="hero-heading"
+      >
+        <div class="container-custom">
+          <span
+            class="monospace text-[var(--color-secondary)] mb-4 inline-block text-sm sm:text-base"
+          >
+            <span data-lang="pt-br">Olá mundo 👋</span>
+            <span data-lang="en">Hello world 👋</span>
+          </span>
+          <h1
+            id="hero-heading"
+            class="responsive-text-4xl font-bold text-[var(--color-light)] mb-6 leading-tight"
+          >
+            <span data-lang="pt-br"
+              >Eu sou <span class="gradient-text">Anna Grateki</span></span
+            >
+            <span data-lang="en"
+              >I'm <span class="gradient-text">Anna Grateki</span></span
+            >
+          </h1>
+          <p
+            class="text-lg sm:text-xl md:text-2xl text-[var(--color-gray-400)] mb-8 max-w-4xl mx-auto leading-relaxed px-4"
+          >
+            <span data-lang="pt-br"
+              >Engenheira de Software & Desenvolvedora Front-End. Acredito que
+              tradição e inovação devem andar juntas — criando soluções que
+              respeitam o passado e constroem o futuro.</span
+            >
+            <span data-lang="en"
+              >Software Engineer & Front-End Developer. I believe tradition and
+              innovation should go hand in hand — creating solutions that honor
+              the past while building for the future.</span
+            >
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center px-4">
+            <a href="#experience" class="btn btn-primary w-full sm:w-auto">
+              <span data-lang="pt-br">Minha Trajetória</span>
+              <span data-lang="en">My Journey</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-2 h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary w-full sm:w-auto">
+              <span data-lang="pt-br">Contato</span>
+              <span data-lang="en">Contact</span>
+            </a>
+          </div>
+
+          <div class="mt-16 flex justify-center space-x-6">
+            <a
+              href="https://www.linkedin.com/in/grateki/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--color-gray-400)] hover:text-[var(--color-light)] transition-colors p-2"
+              aria-label="LinkedIn"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                ></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+            <a
+              href="https://github.com/Grateki"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-[var(--color-gray-400)] hover:text-[var(--color-light)] transition-colors p-2"
+              aria-label="GitHub"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                ></path>
+              </svg>
+            </a>
+            <a
+              href="#"
+              class="text-[var(--color-gray-400)] hover:text-[var(--color-light)] transition-colors p-2"
+              aria-label="Portfolio"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden sm:block"
+        >
+          <a
+            href="#about"
+            class="text-[var(--color-gray-400)] hover:text-[var(--color-light)] transition-colors"
+            aria-label="Scroll to about section"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section
+        id="about"
+        class="py-16 sm:py-20 px-4 sm:px-6 lg:px-24 bg-[var(--color-background-alt)] text-[var(--color-light)] animate-fadeIn"
+        style="animation-delay: 0.2s"
+      >
+        <div class="container-custom">
+          <div
+            class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center"
+          >
+            <div class="relative order-2 lg:order-1">
+              <div
+                class="absolute -top-4 -left-4 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-[var(--color-primary)] opacity-20 rounded-full blur-3xl"
+              ></div>
+              <img
+                src="foto.jpg"
+                alt="Foto de Anna Grateki"
+                class="rounded-2xl shadow-lg relative z-10 w-full object-cover max-w-md mx-auto lg:max-w-none"
+              />
+              <div
+                class="absolute bg-[var(--color-primary)] p-3 sm:p-4 rounded-lg bottom-4 right-4 glass"
+              >
+                <span class="monospace text-xs sm:text-sm text-white">
+                  <span data-lang="pt-br">5+ anos de experiência</span>
+                  <span data-lang="en">5+ years of experience</span>
+                </span>
+              </div>
+            </div>
+            <div class="order-1 lg:order-2">
+              <span
+                class="monospace text-[var(--color-secondary)] mb-2 inline-block text-sm sm:text-base"
+              >
+                <span data-lang="pt-br">Sobre Mim</span>
+                <span data-lang="en">About Me</span>
+              </span>
+              <h2
+                class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6 leading-tight"
+              >
+                <span data-lang="pt-br"
+                  >Engenheira de Software & Desenvolvedora Front-End</span
+                >
+                <span data-lang="en"
+                  >Software Engineer & Front-End Developer</span
+                >
+              </h2>
+              <div
+                class="space-y-4 sm:space-y-6 text-sm sm:text-base leading-relaxed text-[var(--color-gray-300)]"
+              >
+                <p>
+                  <span data-lang="pt-br"
+                    >Sou a Anna, engenheira de software, desenvolvedora
+                    front-end e entusiasta de tecnologia — mas, acima de tudo,
+                    alguém que acredita no valor do que já foi feito. Carrego
+                    comigo o respeito pela história da programação e a convicção
+                    de que tradição e inovação podem (e devem) andar
+                    juntas.</span
+                  >
+                  <span data-lang="en"
+                    >I'm Anna, a software engineer, front-end developer, and
+                    technology enthusiast — but above all, someone who deeply
+                    values tradition. I believe that the best innovations are
+                    built on solid foundations, and I bring that perspective to
+                    everything I do.</span
+                  >
+                </p>
+                <p>
+                  <span data-lang="pt-br"
+                    >Tenho paixão por criar experiências digitais acessíveis e
+                    escaláveis, combinando boas práticas clássicas com as
+                    tendências mais atuais do mercado. Minha trajetória é
+                    marcada pelo uso de Angular, Java/Spring Boot,
+                    microfrontends e integrações robustas com APIs — mas também
+                    pela busca constante por código limpo, documentado e fácil
+                    de manter.</span
+                  >
+                  <span data-lang="en"
+                    >My journey is rooted in classic engineering principles:
+                    clean code, robust documentation, and scalable architecture.
+                    I specialize in Angular, Java/Spring Boot, microfrontends,
+                    and seamless API integrations, always seeking to merge
+                    time-tested best practices with the latest market
+                    trends.</span
+                  >
+                </p>
+                <p>
+                  <span data-lang="pt-br"
+                    >Além da técnica, prezo pela colaboração entre equipes, o
+                    olhar atento ao usuário final e o compromisso com a entrega
+                    responsável. Acredito que liderar é, antes de tudo, ouvir e
+                    valorizar as pessoas — seja em times de desenvolvimento,
+                    seja colaborando com designers, POs e stakeholders.</span
+                  >
+                  <span data-lang="en"
+                    >Collaboration is at the heart of my work. I value clear
+                    communication, empathy, and a user-centered mindset, whether
+                    I'm working with developers, designers, or stakeholders.
+                    Leadership, for me, means listening, respecting different
+                    viewpoints, and building together — always with an eye on
+                    delivering lasting results.</span
+                  >
+                </p>
+              </div>
+              <ul class="space-y-3 my-6 sm:my-8 text-sm sm:text-base">
+                <li class="flex items-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-primary)] flex-shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span data-lang="pt-br"
+                    >Especialista em Angular, Java/Spring Boot e
+                    microfrontends</span
+                  >
+                  <span data-lang="en"
+                    >Specialist in Angular, Java/Spring Boot and
+                    microfrontends</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-primary)] flex-shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span data-lang="pt-br"
+                    >Foco em código limpo, documentado e sustentável</span
+                  >
+                  <span data-lang="en"
+                    >Focus on clean, documented and maintainable code</span
+                  >
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-primary)] flex-shrink-0"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span data-lang="pt-br"
+                    >Colaboração multidisciplinar e liderança empática</span
+                  >
+                  <span data-lang="en"
+                    >Multidisciplinary collaboration and empathetic
+                    leadership</span
+                  >
+                </li>
+              </ul>
+              <a href="#contact" class="btn btn-primary w-full sm:w-auto">
+                <span data-lang="pt-br">Vamos Conversar</span>
+                <span data-lang="en">Let's Talk</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section
+        id="experience"
+        class="py-20 px-6 md:px-24 text-[var(--color-light)] animate-fadeIn"
+        style="animation-delay: 0.25s"
+      >
+        <div class="container-custom">
+          <div class="text-center mb-16">
+            <span
+              class="monospace text-[var(--color-secondary)] mb-2 inline-block"
+            >
+              <span data-lang="pt-br">Trajetória</span>
+              <span data-lang="en">Journey</span>
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold">
+              <span data-lang="pt-br">Minhas Experiências</span>
+              <span data-lang="en">My Experience</span>
+            </h2>
+          </div>
+
+          <div class="max-w-4xl mx-auto">
+            <div class="space-y-8">
+              <div class="relative">
+                <div
+                  class="absolute left-4 top-0 w-0.5 h-full bg-gradient-to-b from-[var(--color-primary)] to-[var(--color-secondary)]"
+                ></div>
+
+                <div class="relative pl-12">
+                  <div
+                    class="absolute left-0 top-2 w-8 h-8 bg-[var(--color-primary)] rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+
+                  <h3 class="text-xl font-bold mb-4">
+                    <span data-lang="pt-br">Desenvolvendo com Propósito</span>
+                    <span data-lang="en">Developing with Purpose</span>
+                  </h3>
+
+                  <p class="mb-4 leading-relaxed text-[var(--color-gray-400)]">
+                    <span data-lang="pt-br"
+                      >Comecei minha jornada em tecnologia com aquele olhar
+                      curioso de quem quer entender não só "como" as coisas
+                      funcionam, mas principalmente "por que" elas são feitas
+                      daquele jeito. Desde cedo, entendi que um bom
+                      desenvolvedor não é só aquele que aprende o framework da
+                      moda, mas quem respeita a base, documenta direito e sabe
+                      trabalhar em equipe.</span
+                    >
+                    <span data-lang="en"
+                      >I started my journey in technology with a curious
+                      mindset, always wanting to understand not just "how"
+                      things work, but also "why" they are done the way they
+                      are. From the beginning, I realized that a good developer
+                      isn't just someone who jumps on the latest framework, but
+                      someone who respects the foundations, documents properly,
+                      and truly values teamwork.</span
+                    >
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="relative pl-12">
+                  <div
+                    class="absolute left-0 top-2 w-8 h-8 bg-[var(--color-primary-light)] rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                      <polyline points="2 17 12 22 22 17" />
+                      <polyline points="2 12 12 17 22 12" />
+                    </svg>
+                  </div>
+
+                  <h3 class="text-xl font-bold mb-4">
+                    <span data-lang="pt-br"
+                      >Projetos Escaláveis & Times Ágeis</span
+                    >
+                    <span data-lang="en">Scalable Projects & Agile Teams</span>
+                  </h3>
+
+                  <p class="mb-4 leading-relaxed text-[var(--color-gray-400)]">
+                    <span data-lang="pt-br"
+                      >Tive a oportunidade de atuar como desenvolvedora
+                      front-end em times ágeis, lidando com projetos que iam
+                      desde aplicações web corporativas até integrações de
+                      microfrontends e sistemas escaláveis para grandes
+                      empresas. Trabalhei muito com Angular, Spring Boot,
+                      monorepos (Nx), integração de múltiplos BFFs, testes
+                      automatizados e manutenção de design systems, sempre
+                      colocando acessibilidade e experiência do usuário como
+                      prioridades.</span
+                    >
+                    <span data-lang="en"
+                      >I've worked as a front-end developer in agile teams,
+                      handling projects ranging from large-scale corporate web
+                      applications to microfrontend integrations and scalable
+                      systems for major companies. My main stack has been
+                      Angular, Spring Boot, Nx monorepos, multi-BFF
+                      integrations, automated testing, and maintaining design
+                      systems — always with a focus on accessibility and user
+                      experience.</span
+                    >
+                  </p>
+
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="tag tag-primary">Angular</span>
+                    <span class="tag tag-primary">Microfrontends</span>
+                    <span class="tag">Nx Monorepos</span>
+                    <span class="tag">BFFs</span>
+                    <span class="tag">Design Systems</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="relative pl-12">
+                  <div
+                    class="absolute left-0 top-2 w-8 h-8 bg-[var(--color-secondary)] rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                  </div>
+
+                  <h3 class="text-xl font-bold mb-4">
+                    <span data-lang="pt-br">Colaboração & Processos</span>
+                    <span data-lang="en">Collaboration & Processes</span>
+                  </h3>
+
+                  <p class="mb-4 leading-relaxed text-[var(--color-gray)]">
+                    <span data-lang="pt-br"
+                      >Colaborei de perto com designers, product owners e outros
+                      squads, cuidando não só do código, mas também da
+                      documentação técnica, fluxos de deploy, organização de
+                      repositórios e compartilhamento de conhecimento dentro dos
+                      times. Nessas experiências, aprendi que valorizar
+                      processos bem definidos, ouvir diferentes opiniões e
+                      buscar sempre a clareza na comunicação são tão importantes
+                      quanto dominar tecnologia.</span
+                    >
+                    <span data-lang="en"
+                      >I have collaborated closely with designers, product
+                      owners, and other squads, taking care not only of code,
+                      but also of technical documentation, deployment pipelines,
+                      repo organization, and knowledge sharing across teams.
+                      These experiences taught me that respecting
+                      well-established processes, listening to different
+                      perspectives, and maintaining clear communication are just
+                      as crucial as mastering technology.</span
+                    >
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="relative pl-12">
+                  <div
+                    class="absolute left-0 top-2 w-8 h-8 bg-[var(--color-accent)] rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+
+                  <h3 class="text-xl font-bold mb-4">
+                    <span data-lang="pt-br">Liderança & Mentoria</span>
+                    <span data-lang="en">Leadership & Mentoring</span>
+                  </h3>
+
+                  <p class="mb-4 leading-relaxed text-[var(--color-gray)]">
+                    <span data-lang="pt-br"
+                      >Além disso, tive espaço para ensinar, apoiar colegas e
+                      construir ambientes mais colaborativos. Participei de
+                      iniciativas para padronizar documentação, criar fluxos de
+                      onboarding mais simples e, sempre que possível, puxar a
+                      responsabilidade de entregar algo bem-feito, sem
+                      atalhos.</span
+                    >
+                    <span data-lang="en"
+                      >I've also had the chance to teach, support my teammates,
+                      and help build more collaborative environments. I took
+                      part in initiatives to standardize documentation, create
+                      smoother onboarding flows, and, whenever possible, step up
+                      to deliver high-quality work — no shortcuts.</span
+                    >
+                  </p>
+                </div>
+              </div>
+
+              <div class="relative">
+                <div class="relative pl-12">
+                  <div
+                    class="absolute left-0 top-2 w-8 h-8 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full flex items-center justify-center"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 text-white"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M9 12l2 2 4-4" />
+                      <path
+                        d="M21 12c.552 0 1-.448 1-1V5c0-.552-.448-1-1-1H3c-.552 0-1 .448-1 1v6c0 .552.448 1 1 1h9l4 4V12z"
+                      />
+                    </svg>
+                  </div>
+
+                  <h3 class="text-xl font-bold mb-4">
+                    <span data-lang="pt-br">Excelência & Inovação</span>
+                    <span data-lang="en">Excellence & Innovation</span>
+                  </h3>
+
+                  <p class="leading-relaxed text-[var(--color-gray)]">
+                    <span data-lang="pt-br"
+                      >Hoje, olho pra minha trajetória com orgulho de quem fez o
+                      "feijão com arroz" bem feito, mas nunca deixou de inovar e
+                      buscar excelência.</span
+                    >
+                    <span data-lang="en"
+                      >Today, I look at my path with pride for always nailing
+                      the basics, never shying away from innovation, and
+                      constantly striving for excellence.</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section
+        id="skills"
+        class="py-20 px-6 md:px-24 text-[var(--color-light)] animate-fadeIn"
+        style="animation-delay: 0.3s"
+      >
+        <div class="container-custom">
+          <div class="text-center mb-16">
+            <span
+              class="monospace text-[var(--color-secondary)] mb-2 inline-block"
+            >
+              <span data-lang="pt-br">Habilidades</span>
+              <span data-lang="en">Skills</span>
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold">
+              <span data-lang="pt-br">Minha Especialização</span>
+              <span data-lang="en">My Specialization</span>
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Skill Card 1 -->
+            <div class="card">
+              <div
+                class="bg-[var(--color-primary)] p-3 rounded-lg inline-block mb-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                  <polyline points="2 17 12 22 22 17"></polyline>
+                  <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold mb-3">
+                <span data-lang="pt-br">Engenharia de Software</span>
+                <span data-lang="en">Software Engineering</span>
+              </h3>
+              <p class="text-[var(--color-gray)]">
+                <span data-lang="pt-br"
+                  >Trabalho com desenvolvimento de aplicações web escaláveis,
+                  sempre buscando equilíbrio entre inovação e as boas práticas
+                  tradicionais do desenvolvimento. Tenho experiência sólida em
+                  Angular, integração de BFFs, microfrontends, e testes
+                  automatizados com Jest.</span
+                >
+                <span data-lang="en"
+                  >I build scalable web applications, always balancing
+                  innovation with classic software development best practices.
+                  My experience includes Angular, BFF integrations,
+                  microfrontends, and automated testing with Jest.</span
+                >
+              </p>
+            </div>
+
+            <!-- Skill Card 2 -->
+            <div class="card">
+              <div
+                class="bg-[var(--color-primary)] p-3 rounded-lg inline-block mb-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold mb-3">
+                <span data-lang="pt-br">UX e Colaboração Multidisciplinar</span>
+                <span data-lang="en">UX & Multidisciplinary Collaboration</span>
+              </h3>
+              <p class="text-[var(--color-gray)]">
+                <span data-lang="pt-br"
+                  >Atuo de forma próxima com times de design, buscando soluções
+                  que coloquem o usuário no centro, sem abrir mão de
+                  performance, acessibilidade e código sustentável.</span
+                >
+                <span data-lang="en"
+                  >I work closely with design teams to create solutions that put
+                  the user first, while maintaining performance, accessibility,
+                  and maintainable code.</span
+                >
+              </p>
+            </div>
+
+            <!-- Skill Card 3 -->
+            <div class="card">
+              <div
+                class="bg-[var(--color-primary)] p-3 rounded-lg inline-block mb-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6 text-white"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="3" y1="9" x2="21" y2="9"></line>
+                  <line x1="9" y1="21" x2="9" y2="9"></line>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold mb-3">
+                <span data-lang="pt-br">Arquitetura & Integração</span>
+                <span data-lang="en">Architecture & Integration</span>
+              </h3>
+              <p class="text-[var(--color-gray)]">
+                <span data-lang="pt-br"
+                  >Especializada em arquiteturas robustas com Java/Spring Boot,
+                  integrações de APIs, microfrontends e soluções que respeitam o
+                  passado enquanto constroem o futuro.</span
+                >
+                <span data-lang="en"
+                  >Specialized in robust architectures with Java/Spring Boot,
+                  API integrations, microfrontends and solutions that honor the
+                  past while building for the future.</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- Tecnologias -->
+          <div class="mt-16">
+            <h3 class="text-2xl font-bold mb-8 text-center">
+              <span data-lang="pt-br">Tecnologias</span>
+              <span data-lang="en">Technologies</span>
+            </h3>
+            <div class="flex flex-wrap justify-center gap-4">
+              <span class="tag tag-primary">Angular</span>
+              <span class="tag tag-primary">TypeScript</span>
+              <span class="tag tag-primary">Java</span>
+              <span class="tag tag-primary">Spring Boot</span>
+              <span class="tag">HTML5</span>
+              <span class="tag">CSS3/SASS</span>
+              <span class="tag">JavaScript</span>
+              <span class="tag">Jest</span>
+              <span class="tag">Tailwind CSS</span>
+              <span class="tag">Microfrontends</span>
+              <span class="tag">BFFs</span>
+              <span class="tag">APIs REST</span>
+              <span class="tag">Git</span>
+              <span class="tag">Figma</span>
+              <span class="tag">
+                <span data-lang="pt-br">Acessibilidade</span>
+                <span data-lang="en">Accessibility</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section
+        id="projects"
+        class="py-20 bg-gradient-to-b from-[var(--color-background-alt)] to-[var(--color-background)] animate-fadeIn"
+        style="animation-delay: 1.2s"
+        role="region"
+        aria-labelledby="projects-heading"
+      >
+        <div class="container-custom">
+          <div class="text-center mb-16">
+            <h2
+              id="projects-heading"
+              class="text-3xl sm:text-4xl font-bold text-[var(--color-light)] mb-6"
+            >
+              <span data-lang="pt-br">Projetos</span>
+              <span data-lang="en">Projects</span>
+            </h2>
+            <p class="text-lg text-[var(--color-gray-400)] max-w-3xl mx-auto">
+              <span data-lang="pt-br"
+                >Uma seleção dos principais projetos que desenvolvi, destacando
+                diferentes aspectos da minha experiência em desenvolvimento e
+                design.</span
+              >
+              <span data-lang="en"
+                >A selection of key projects I've developed, showcasing
+                different aspects of my experience in development and
+                design.</span
+              >
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Project 1 -->
+            <div class="card">
+              <h3 class="text-xl font-bold text-[var(--color-light)] mb-4">
+                <span data-lang="pt-br">Jornada Modular de Aplicações Web</span>
+                <span data-lang="en">Modular Web Application Journey</span>
+              </h3>
+              <div class="mb-4">
+                <span class="tag tag-primary">Angular</span>
+                <span class="tag">Nx Monorepo</span>
+                <span class="tag">Microfrontends</span>
+                <span class="tag">BFF's</span>
+                <span class="tag">Jest</span>
+                <span class="tag">Testing Library</span>
+                <span class="tag">CI/CD</span>
+              </div>
+              <p class="text-[var(--color-gray-400)] mb-4 leading-relaxed">
+                <span data-lang="pt-br"
+                  >Participei da construção de um ecossistema integrado de
+                  aplicações web, onde atuei desde a arquitetura front-end até a
+                  integração de múltiplos microfrontends e BFFs. Fui responsável
+                  por estruturar o monorepo, padronizar fluxos de versionamento,
+                  garantir a qualidade de código com testes automatizados e
+                  promover boas práticas de documentação.</span
+                >
+                <span data-lang="en"
+                  >Participated in building an integrated ecosystem of web
+                  applications, working from front-end architecture to
+                  multi-microfrontend and BFF integration. I structured the
+                  monorepo, standardized versioning flows, ensured code quality
+                  with automated testing, and promoted best documentation
+                  practices.</span
+                >
+              </p>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="card">
+              <h3 class="text-xl font-bold text-[var(--color-light)] mb-4">
+                <span data-lang="pt-br"
+                  >Sistema de Documentação Técnica para Times Ágeis</span
+                >
+                <span data-lang="en"
+                  >Agile Team Technical Documentation System</span
+                >
+              </h3>
+              <div class="mb-4">
+                <span class="tag tag-secondary">Markdown</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Templates</span>
+                <span class="tag">Changelogs</span>
+              </div>
+              <p class="text-[var(--color-gray-400)] mb-4 leading-relaxed">
+                <span data-lang="pt-br"
+                  >Implementei um padrão de documentação que inclui desde o
+                  fluxo de bugs e post-mortem até organização de changelogs,
+                  onboarding e arquitetura de sistemas. Isso facilitou a vida de
+                  desenvolvedores novos no time e melhorou a rastreabilidade dos
+                  projetos.</span
+                >
+                <span data-lang="en"
+                  >Implemented a documentation standard covering everything from
+                  bug and post-mortem flows to changelog organization,
+                  onboarding, and system architecture. This made onboarding
+                  easier for new developers and improved project
+                  traceability.</span
+                >
+              </p>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="card">
+              <h3 class="text-xl font-bold text-[var(--color-light)] mb-4">
+                <span data-lang="pt-br">Design System Unificado</span>
+                <span data-lang="en">Unified Design System</span>
+              </h3>
+              <div class="mb-4">
+                <span class="tag tag-primary">Figma</span>
+                <span class="tag">Angular</span>
+                <span class="tag">SCSS</span>
+                <span class="tag">
+                  <span data-lang="pt-br">Acessibilidade</span>
+                  <span data-lang="en">Accessibility</span>
+                </span>
+              </div>
+              <p class="text-[var(--color-gray-400)] mb-4 leading-relaxed">
+                <span data-lang="pt-br"
+                  >Desenvolvi e mantive um Design System completo, promovendo
+                  consistência visual, acessibilidade e agilidade na entrega de
+                  features. Atuei tanto na prototipação quanto na implementação
+                  dos componentes, documentando cada etapa do processo para
+                  garantir reuso e escalabilidade entre diferentes squads.</span
+                >
+                <span data-lang="en"
+                  >Developed and maintained a complete Design System, ensuring
+                  visual consistency, accessibility, and faster feature
+                  delivery. Worked on both prototyping and implementation of
+                  components, documenting every step to guarantee reusability
+                  and scalability across different squads.</span
+                >
+              </p>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="card">
+              <h3 class="text-xl font-bold text-[var(--color-light)] mb-4">
+                <span data-lang="pt-br">Projeto de Card Game Mitológico</span>
+                <span data-lang="en">Mythological Card Game Project</span>
+                <span class="text-sm text-[var(--color-secondary)] ml-2">
+                  <span data-lang="pt-br">(Pessoal)</span>
+                  <span data-lang="en">(Personal)</span>
+                </span>
+              </h3>
+              <div class="mb-4">
+                <span class="tag tag-secondary">Obsidian</span>
+                <span class="tag">Game Design</span>
+                <span class="tag">
+                  <span data-lang="pt-br">Design Narrativo</span>
+                  <span data-lang="en">Narrative Design</span>
+                </span>
+                <span class="tag">GDD</span>
+              </div>
+              <p class="text-[var(--color-gray-400)] mb-4 leading-relaxed">
+                <span data-lang="pt-br"
+                  >Idealizei e comecei a estruturar um card game digital baseado
+                  em criaturas mitológicas underground, cuidando de todo o
+                  planejamento do game design, mecânicas, narrativa e
+                  documentação técnica para futuros desenvolvedores.</span
+                >
+                <span data-lang="en"
+                  >Created and started structuring a digital card game based on
+                  underground mythological creatures, managing the entire game
+                  design planning, mechanics, narrative, and technical
+                  documentation for future developers.</span
+                >
+              </p>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="card lg:col-span-2">
+              <h3 class="text-xl font-bold text-[var(--color-light)] mb-4">
+                <span data-lang="pt-br"
+                  >Integração de Testes Automatizados e Monitoramento</span
+                >
+                <span data-lang="en"
+                  >Automated Testing & Monitoring Integration</span
+                >
+              </h3>
+              <div class="mb-4">
+                <span class="tag tag-primary">Jest</span>
+                <span class="tag">Testing Library</span>
+                <span class="tag">SonarQube</span>
+                <span class="tag">Datadog</span>
+                <span class="tag">AWS</span>
+                <span class="tag">CI/CD</span>
+              </div>
+              <p class="text-[var(--color-gray-400)] mb-4 leading-relaxed">
+                <span data-lang="pt-br"
+                  >Liderei a implementação de pipelines de testes automatizados
+                  e monitoramento de qualidade de código em ambientes
+                  distribuídos. Utilizei ferramentas de mercado para garantir
+                  estabilidade, rastreabilidade e performance das aplicações em
+                  produção.</span
+                >
+                <span data-lang="en"
+                  >Led the implementation of automated testing pipelines and
+                  code quality monitoring in distributed environments. Used
+                  market-leading tools to ensure stability, traceability, and
+                  high performance of production applications.</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="text-center mt-12">
+            <p class="text-[var(--color-gray-400)] mb-6">
+              <span data-lang="pt-br"
+                >Interessado em ver mais detalhes ou discutir
+                colaborações?</span
+              >
+              <span data-lang="en"
+                >Interested in seeing more details or discussing
+                collaborations?</span
+              >
+            </p>
+            <a href="#contact" class="btn btn-primary">
+              <span data-lang="pt-br">Vamos Conversar</span>
+              <span data-lang="en">Let's Talk</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ml-2 h-5 w-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section
+        id="contact"
+        class="py-20 px-6 md:px-24 bg-[var(--color-background-alt)] text-[var(--color-light)] animate-fadeIn"
+        style="animation-delay: 0.5s"
+      >
+        <div class="container-custom">
+          <div class="text-center mb-16">
+            <span
+              class="monospace text-[var(--color-secondary)] mb-2 inline-block"
+            >
+              <span data-lang="pt-br">Vamos Conversar</span>
+              <span data-lang="en">Let's Talk</span>
+            </span>
+            <h2 class="text-3xl md:text-4xl font-bold">
+              <span data-lang="pt-br">Entre em Contato</span>
+              <span data-lang="en">Get In Touch</span>
+            </h2>
+            <p class="mt-4 max-w-2xl mx-auto">
+              <span data-lang="pt-br"
+                >Estou sempre aberta a novas oportunidades e conversas
+                interessantes sobre tecnologia, UX e desenvolvimento.</span
+              >
+              <span data-lang="en"
+                >I'm always open to new opportunities and interesting
+                conversations about technology, UX and development.</span
+              >
+            </p>
+          </div>
+
+          <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+            <!-- Contact Info -->
+            <div class="space-y-8">
+              <div class="flex items-center space-x-4">
+                <div
+                  class="bg-[var(--color-primary)] p-3 rounded-lg flex-shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <a
+                    href="mailto:ac.grateki@gmail.com"
+                    class="text-[var(--color-light)] hover:text-[var(--color-primary)] transition-colors text-lg font-medium break-all"
+                  >
+                    anna@grateki.dev
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div
+                  class="bg-[var(--color-primary)] p-3 rounded-lg flex-shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                    />
+                    <rect x="2" y="9" width="4" height="12" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <a
+                    href="https://www.linkedin.com/in/grateki/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[var(--color-light)] hover:text-[var(--color-primary)] transition-colors text-lg font-medium break-all"
+                  >
+                    linkedin.com/in/grateki
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div
+                  class="bg-[var(--color-primary)] p-3 rounded-lg flex-shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    />
+                  </svg>
+                </div>
+                <div class="min-w-0">
+                  <a
+                    href="https://github.com/Grateki"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-[var(--color-light)] hover:text-[var(--color-primary)] transition-colors text-lg font-medium break-all"
+                  >
+                    github.com/Grateki
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="card">
+              <h3 class="text-xl font-bold mb-6">
+                <span data-lang="pt-br">Envie uma Mensagem</span>
+                <span data-lang="en">Send a Message</span>
+              </h3>
+              <form class="space-y-4">
+                <div>
+                  <label class="block text-sm font-medium mb-2">
+                    <span data-lang="pt-br">Nome</span>
+                    <span data-lang="en">Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    class="w-full px-4 py-3 bg-[var(--color-background)] border border-[var(--color-gray-700)] rounded-lg focus:outline-none focus:border-[var(--color-primary)] transition-colors text-[var(--color-light)]"
+                    placeholder="John Doe"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">Email</label>
+                  <input
+                    type="email"
+                    class="w-full px-4 py-3 bg-[var(--color-background)] border border-[var(--color-gray-700)] rounded-lg focus:outline-none focus:border-[var(--color-primary)] transition-colors text-[var(--color-light)]"
+                    placeholder="seu@email.com"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-2">
+                    <span data-lang="pt-br">Mensagem</span>
+                    <span data-lang="en">Message</span>
+                  </label>
+                  <textarea
+                    rows="4"
+                    class="w-full px-4 py-3 bg-[var(--color-background)] border border-[var(--color-gray-700)] rounded-lg focus:outline-none focus:border-[var(--color-primary)] transition-colors resize-none text-[var(--color-light)]"
+                    placeholder="xxx"
+                  ></textarea>
+                </div>
+                <button type="submit" class="w-full btn btn-primary">
+                  <span data-lang="pt-br">Enviar Mensagem</span>
+                  <span data-lang="en">Send Message</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="py-8 text-center text-[var(--color-gray-400)]"
+      role="contentinfo"
+    >
+      <div class="container-custom">
+        <div class="divider mb-8"></div>
+        <p class="mb-4">
+          <span data-lang="pt-br">Feito com ❤️ e muito café ☕</span>
+          <span data-lang="en">Made with ❤️ and lots of coffee ☕</span>
+        </p>
+        <p class="text-sm">
+          <span data-lang="pt-br"
+            >© 2025 Anna Grateki. Todos os direitos reservados.</span
+          >
+          <span data-lang="en">© 2025 Anna Grateki. All rights reserved.</span>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

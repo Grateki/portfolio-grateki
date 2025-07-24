@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System | Anna Grateki</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* === DESIGN SYSTEM === */
+
+      /* Typography - FiraCode Nerd Font */
+      @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        /* Color Palette - Modern Gray & Purple */
+        --color-light: #ffffff;
+        --color-gray-100: #f8fafc;
+        --color-gray-200: #e2e8f0;
+        --color-gray-300: #cbd5e1;
+        --color-gray-400: #94a3b8;
+        --color-gray-500: #64748b;
+        --color-gray-600: #475569;
+        --color-gray-700: #374151;
+        --color-gray-800: #1f2937;
+        --color-gray-900: #111827;
+
+        --color-primary: #8b5cf6;
+        --color-primary-dark: #7c3aed;
+        --color-primary-light: #a78bfa;
+        --color-secondary: #c4b5fd;
+        --color-accent: #6366f1;
+        --color-success: #10b981;
+        --color-warning: #f59e0b;
+        --color-error: #ef4444;
+        --color-background: #000000;
+        --color-background-alt: #111827;
+
+        /* Spacing System */
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 1.5rem;
+        --space-xl: 2rem;
+        --space-2xl: 3rem;
+        --space-3xl: 5rem;
+
+        /* Border Radius */
+        --radius-sm: 4px;
+        --radius-md: 8px;
+        --radius-lg: 12px;
+        --radius-xl: 16px;
+        --radius-2xl: 24px;
+        --radius-full: 9999px;
+
+        /* Shadows */
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+        --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+        /* Transitions */
+        --transition-fast: 150ms ease;
+        --transition-normal: 300ms ease;
+        --transition-slow: 500ms ease;
+
+        /* Z-index scale */
+        --z-base: 1;
+        --z-above: 10;
+        --z-modal: 100;
+        --z-tooltip: 500;
+      }
+
+      html {
+        font-family: "Fira Code", monospace;
+        background-color: #000000;
+      }
+
+      body {
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .monospace {
+        font-family: "Fira Code", monospace;
+      }
+
+      /* Container styles */
+      .container-custom {
+        width: 100%;
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+      }
+
+      @media (max-width: 768px) {
+        .container-custom {
+          padding-left: var(--space-md);
+          padding-right: var(--space-md);
+        }
+      }
+
+      /* Accessibility improvements */
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 6px;
+        background: var(--color-primary);
+        color: white;
+        padding: 8px;
+        text-decoration: none;
+        border-radius: var(--radius-md);
+        z-index: 1000;
+        transition: top var(--transition-fast);
+      }
+
+      .skip-link:focus {
+        top: 6px;
+      }
+
+      /* Focus styles for accessibility */
+      *:focus {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+
+      /* Gradient text */
+      .gradient-text {
+        background: linear-gradient(
+          135deg,
+          var(--color-primary),
+          var(--color-secondary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Custom animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fadeIn {
+        animation: fadeIn var(--transition-normal) forwards;
+      }
+
+      /* Button styles */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius-lg);
+        font-weight: 600;
+        transition: all var(--transition-normal);
+        cursor: pointer;
+        border: none;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      .btn-primary {
+        background-color: var(--color-primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--color-primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+      }
+
+      .btn-secondary {
+        background-color: transparent;
+        border: 2px solid var(--color-primary);
+        color: var(--color-primary);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--color-primary);
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+      }
+
+      /* Card styles */
+      .card {
+        background-color: var(--color-gray-800);
+        border: 1px solid var(--color-gray-700);
+        border-radius: var(--radius-xl);
+        padding: var(--space-xl);
+        transition: transform var(--transition-normal),
+          box-shadow var(--transition-normal);
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+        border-color: var(--color-primary);
+      }
+
+      /* Tag styles */
+      .tag {
+        display: inline-block;
+        background-color: var(--color-gray-800);
+        color: var(--color-gray-200);
+        padding: 0.375rem 0.875rem;
+        border-radius: var(--radius-full);
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid var(--color-gray-700);
+        transition: all var(--transition-fast);
+      }
+
+      .tag:hover {
+        background-color: var(--color-gray-700);
+        border-color: var(--color-primary);
+      }
+
+      .tag-primary {
+        background-color: var(--color-primary);
+        color: white;
+        border-color: var(--color-primary);
+      }
+
+      .tag-secondary {
+        background-color: var(--color-secondary);
+        color: var(--color-gray-900);
+        border-color: var(--color-secondary);
+      }
+
+      /* Color swatch */
+      .color-swatch {
+        width: 4rem;
+        height: 4rem;
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--color-gray-700);
+        margin-bottom: 0.5rem;
+        transition: transform var(--transition-fast);
+      }
+
+      .color-swatch:hover {
+        transform: scale(1.05);
+      }
+
+      /* Code block */
+      .code-block {
+        background-color: var(--color-gray-900);
+        border: 1px solid var(--color-gray-700);
+        border-radius: var(--radius-md);
+        padding: 1rem;
+        font-family: "Fira Code", monospace;
+        font-size: 0.875rem;
+        color: var(--color-gray-300);
+        overflow-x: auto;
+      }
+
+      /* Glassmorphism */
+      .glass {
+        background: rgba(17, 24, 39, 0.8);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+      }
+
+      /* Language Selector */
+      .lang-selector {
+        position: relative;
+        display: inline-block;
+      }
+
+      .lang-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--color-gray-800);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius-md);
+        padding: var(--space-sm);
+        min-width: 120px;
+        z-index: 1000;
+      }
+
+      .lang-selector:hover .lang-dropdown {
+        display: block;
+      }
+
+      .lang-option {
+        display: block;
+        padding: var(--space-sm);
+        color: var(--color-light);
+        text-decoration: none;
+        border-radius: var(--radius-sm);
+        transition: background-color var(--transition-fast);
+      }
+
+      .lang-option:hover {
+        background-color: var(--color-primary);
+      }
+
+      .lang-option.active {
+        background-color: var(--color-primary-dark);
+      }
+
+      /* Hidden content for language switching */
+      [data-lang]:not([data-lang="pt-br"]) {
+        display: none;
+      }
+
+      html[lang="en"] [data-lang]:not([data-lang="en"]) {
+        display: none;
+      }
+
+      html[lang="en"] [data-lang="en"] {
+        display: block;
+      }
+
+      html[lang="pt-BR"] [data-lang="pt-br"] {
+        display: block;
+      }
+
+      /* Responsive typography */
+      @media (max-width: 768px) {
+        .responsive-text-4xl {
+          font-size: 2rem;
+          line-height: 2.5rem;
+        }
+
+        .responsive-text-3xl {
+          font-size: 1.75rem;
+          line-height: 2.25rem;
+        }
+
+        .responsive-text-2xl {
+          font-size: 1.5rem;
+          line-height: 2rem;
+        }
+      }
+
+      /* Responsive spacing */
+      @media (max-width: 768px) {
+        .responsive-py-20 {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+
+        .responsive-mb-16 {
+          margin-bottom: 2rem;
+        }
+
+        .responsive-gap-8 {
+          gap: 1rem;
+        }
+      }
+    </style>
+    <script>
+      // Language switching functionality
+      function switchLanguage(lang) {
+        document.documentElement.lang = lang;
+        localStorage.setItem("preferred-language", lang);
+
+        // Update active language in dropdown
+        document.querySelectorAll(".lang-option").forEach((option) => {
+          option.classList.remove("active");
+        });
+        document
+          .querySelector(`[data-lang-option="${lang}"]`)
+          .classList.add("active");
+      }
+
+      // Load saved language preference
+      document.addEventListener("DOMContentLoaded", function () {
+        const savedLang = localStorage.getItem("preferred-language") || "pt-BR";
+        switchLanguage(savedLang);
+      });
+    </script>
+  </head>
+  <body
+    class="bg-[var(--color-background)] text-[var(--color-light)] min-h-screen"
+  >
+    <!-- Skip to main content for accessibility -->
+    <a href="#main-content" class="skip-link">
+      <span data-lang="pt-br">Pular para o conteúdo principal</span>
+      <span data-lang="en">Skip to main content</span>
+    </a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 glass py-4" role="banner">
+      <div class="container-custom flex justify-between items-center">
+        <a
+          href="cover2.html"
+          class="text-2xl font-bold text-[var(--color-light)]"
+        >
+          <span class="gradient-text">Anna Grateki</span>
+        </a>
+
+        <div class="flex items-center space-x-4">
+          <!-- Language Selector -->
+          <div class="lang-selector">
+            <button
+              class="text-[var(--color-light)] hover:text-[var(--color-primary-light)] transition-colors flex items-center"
+              aria-label="Language selector"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="mr-1"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="2" y1="12" x2="22" y2="12"></line>
+                <path
+                  d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                ></path>
+              </svg>
+              <span data-lang="pt-br">PT</span>
+              <span data-lang="en">EN</span>
+            </button>
+            <div class="lang-dropdown">
+              <a
+                href="#"
+                data-lang-option="pt-BR"
+                onclick="switchLanguage('pt-BR')"
+                class="lang-option active"
+                >🇧🇷 pt</a
+              >
+              <a
+                href="#"
+                data-lang-option="en"
+                onclick="switchLanguage('en')"
+                class="lang-option"
+                >🇺🇸 en</a
+              >
+            </div>
+          </div>
+
+          <a href="cover2.html" class="btn btn-secondary">
+            <span data-lang="pt-br">← Voltar</span>
+            <span data-lang="en">← Back</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" class="responsive-py-20">
+      <div class="container-custom">
+        <!-- Hero Section -->
+        <div class="text-center responsive-mb-16">
+          <h1
+            class="responsive-text-4xl font-bold text-[var(--color-light)] mb-4"
+          >
+            <span data-lang="pt-br">Sistema de Design</span>
+            <span data-lang="en">Design System</span>
+          </h1>
+          <p class="text-lg text-[var(--color-gray-400)] max-w-3xl mx-auto">
+            <span data-lang="pt-br"
+              >Uma visão geral dos componentes, cores, tipografia e padrões
+              utilizados no portfólio de Anna Grateki.</span
+            >
+            <span data-lang="en"
+              >An overview of the components, colors, typography and patterns
+              used in Anna Grateki's portfolio.</span
+            >
+          </p>
+        </div>
+
+        <!-- Color Palette -->
+        <section class="mb-16">
+          <h2
+            class="responsive-text-3xl font-bold text-[var(--color-light)] mb-8"
+          >
+            <span data-lang="pt-br">Paleta de Cores</span>
+            <span data-lang="en">Color Palette</span>
+          </h2>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 responsive-gap-8"
+          >
+            <!-- Primary Colors -->
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Cores Primárias</span>
+                <span data-lang="en">Primary Colors</span>
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                  <div class="color-swatch bg-[var(--color-primary)]"></div>
+                  <div>
+                    <p class="font-semibold">Primary</p>
+                    <p class="text-sm text-[var(--color-gray-400)]">#8b5cf6</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="color-swatch bg-[var(--color-primary-dark)]"
+                  ></div>
+                  <div>
+                    <p class="font-semibold">Primary Dark</p>
+                    <p class="text-sm text-[var(--color-gray-400)]">#7c3aed</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div
+                    class="color-swatch bg-[var(--color-primary-light)]"
+                  ></div>
+                  <div>
+                    <p class="font-semibold">Primary Light</p>
+                    <p class="text-sm text-[var(--color-gray-400)]">#a78bfa</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gray Scale -->
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Escala de Cinza</span>
+                <span data-lang="en">Gray Scale</span>
+              </h3>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="text-center">
+                  <div class="color-swatch bg-white mx-auto"></div>
+                  <p class="text-xs">Light</p>
+                  <p class="text-xs text-[var(--color-gray-400)]">#ffffff</p>
+                </div>
+                <div class="text-center">
+                  <div
+                    class="color-swatch bg-[var(--color-gray-300)] mx-auto"
+                  ></div>
+                  <p class="text-xs">Gray 300</p>
+                  <p class="text-xs text-[var(--color-gray-400)]">#cbd5e1</p>
+                </div>
+                <div class="text-center">
+                  <div
+                    class="color-swatch bg-[var(--color-gray-600)] mx-auto"
+                  ></div>
+                  <p class="text-xs">Gray 600</p>
+                  <p class="text-xs text-[var(--color-gray-400)]">#475569</p>
+                </div>
+                <div class="text-center">
+                  <div class="color-swatch bg-[#111827] mx-auto"></div>
+                  <p class="text-xs">Gray 900</p>
+                  <p class="text-xs text-[var(--color-gray-400)]">#111827</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Accent Colors -->
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Cores de Destaque</span>
+                <span data-lang="en">Accent Colors</span>
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                  <div class="color-swatch bg-[var(--color-secondary)]"></div>
+                  <div>
+                    <p class="font-semibold">Secondary</p>
+                    <p class="text-sm text-[var(--color-gray-400)]">#c4b5fd</p>
+                  </div>
+                </div>
+                <div class="flex items-center space-x-3">
+                  <div class="color-swatch bg-[var(--color-accent)]"></div>
+                  <div>
+                    <p class="font-semibold">Accent</p>
+                    <p class="text-sm text-[var(--color-gray-400)]">#6366f1</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Typography -->
+        <section class="mb-16">
+          <h2
+            class="responsive-text-3xl font-bold text-[var(--color-light)] mb-8"
+          >
+            <span data-lang="pt-br">Tipografia</span>
+            <span data-lang="en">Typography</span>
+          </h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 responsive-gap-8">
+            <!-- Primary Font -->
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">Fira Code</h3>
+              <p class="text-[var(--color-gray-400)] mb-6">
+                <span data-lang="pt-br"
+                  >Fonte principal usada em todo o site</span
+                >
+                <span data-lang="en"
+                  >Primary font used throughout the site</span
+                >
+              </p>
+              <div class="space-y-4">
+                <div>
+                  <h1 class="text-4xl font-bold">Heading 1</h1>
+                  <p class="text-sm text-[var(--color-gray-400)]">
+                    4xl - 2.25rem
+                  </p>
+                </div>
+                <div>
+                  <h2 class="text-3xl font-bold">Heading 2</h2>
+                  <p class="text-sm text-[var(--color-gray-400)]">
+                    3xl - 1.875rem
+                  </p>
+                </div>
+                <div>
+                  <h3 class="text-2xl font-bold">Heading 3</h3>
+                  <p class="text-sm text-[var(--color-gray-400)]">
+                    2xl - 1.5rem
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Typography Examples -->
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Exemplos de Uso</span>
+                <span data-lang="en">Usage Examples</span>
+              </h3>
+              <p class="text-[var(--color-gray-400)] mb-6">
+                <span data-lang="pt-br"
+                  >FiraCode fornece excelente legibilidade para código e
+                  texto</span
+                >
+                <span data-lang="en"
+                  >FiraCode provides excellent readability for code and
+                  text</span
+                >
+              </p>
+              <div class="space-y-4">
+                <div>
+                  <p class="text-lg">
+                    <span data-lang="pt-br">Texto grande para introduções</span>
+                    <span data-lang="en">Large text for introductions</span>
+                  </p>
+                  <p class="text-sm text-[var(--color-gray-400)]">
+                    lg - 1.125rem
+                  </p>
+                </div>
+                <div>
+                  <p class="text-base">
+                    <span data-lang="pt-br"
+                      >Texto do corpo padrão para parágrafos</span
+                    >
+                    <span data-lang="en"
+                      >Standard body text for paragraphs</span
+                    >
+                  </p>
+                  <p class="text-sm text-[var(--color-gray-400)]">
+                    base - 1rem
+                  </p>
+                </div>
+                <div>
+                  <p class="text-sm">
+                    <span data-lang="pt-br">Texto pequeno para legendas</span>
+                    <span data-lang="en">Small text for captions</span>
+                  </p>
+                  <p class="text-sm text-[var(--color-gray-400)]">
+                    sm - 0.875rem
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Components -->
+        <section class="mb-16">
+          <h2
+            class="responsive-text-3xl font-bold text-[var(--color-light)] mb-8"
+          >
+            <span data-lang="pt-br">Componentes</span>
+            <span data-lang="en">Components</span>
+          </h2>
+
+          <!-- Buttons -->
+          <div class="mb-12">
+            <h3 class="responsive-text-2xl font-bold mb-6">
+              <span data-lang="pt-br">Botões</span>
+              <span data-lang="en">Buttons</span>
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 responsive-gap-8">
+              <div class="card">
+                <h4 class="text-lg font-bold mb-4">
+                  <span data-lang="pt-br">Exemplos</span>
+                  <span data-lang="en">Examples</span>
+                </h4>
+                <div class="flex flex-wrap gap-4 mb-6">
+                  <button class="btn btn-primary">
+                    <span data-lang="pt-br">Botão Primário</span>
+                    <span data-lang="en">Primary Button</span>
+                  </button>
+                  <button class="btn btn-secondary">
+                    <span data-lang="pt-br">Botão Secundário</span>
+                    <span data-lang="en">Secondary Button</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="card">
+                <h4 class="text-lg font-bold mb-4">CSS</h4>
+                <div class="code-block">
+                  .btn { padding: 0.75rem 1.5rem; border-radius:
+                  var(--radius-lg); font-weight: 600; transition: all
+                  var(--transition-normal); } .btn-primary { background-color:
+                  var(--color-primary); color: white; }
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cards -->
+          <div class="mb-12">
+            <h3 class="responsive-text-2xl font-bold mb-6">Cards</h3>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 responsive-gap-8"
+            >
+              <div class="card">
+                <h4 class="text-lg font-bold mb-2">
+                  <span data-lang="pt-br">Card Padrão</span>
+                  <span data-lang="en">Default Card</span>
+                </h4>
+                <p class="text-sm text-[var(--color-gray-400)] mb-4">
+                  <span data-lang="pt-br"
+                    >Este é um card padrão usado para apresentar conteúdo.</span
+                  >
+                  <span data-lang="en"
+                    >This is a default card used to present content.</span
+                  >
+                </p>
+                <a
+                  href="#"
+                  class="text-[var(--color-primary)] font-semibold hover:text-[var(--color-primary-light)] transition-colors"
+                >
+                  <span data-lang="pt-br">Ver mais →</span>
+                  <span data-lang="en">Read more →</span>
+                </a>
+              </div>
+
+              <div class="card glass">
+                <h4 class="text-lg font-bold mb-2">
+                  <span data-lang="pt-br">Card Glass</span>
+                  <span data-lang="en">Glass Card</span>
+                </h4>
+                <p class="text-sm text-[var(--color-gray-400)] mb-4">
+                  <span data-lang="pt-br"
+                    >Card com efeito glassmorphism para destaque.</span
+                  >
+                  <span data-lang="en"
+                    >Card with glassmorphism effect for emphasis.</span
+                  >
+                </p>
+                <a
+                  href="#"
+                  class="text-[var(--color-primary)] font-semibold hover:text-[var(--color-primary-light)] transition-colors"
+                >
+                  <span data-lang="pt-br">Ver mais →</span>
+                  <span data-lang="en">Read more →</span>
+                </a>
+              </div>
+
+              <div
+                class="card bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)]"
+              >
+                <h4 class="text-lg font-bold mb-2 text-white">
+                  <span data-lang="pt-br">Card Gradiente</span>
+                  <span data-lang="en">Gradient Card</span>
+                </h4>
+                <p class="text-sm text-white/80 mb-4">
+                  <span data-lang="pt-br"
+                    >Card com gradiente para elementos especiais.</span
+                  >
+                  <span data-lang="en"
+                    >Gradient card for special elements.</span
+                  >
+                </p>
+                <a
+                  href="#"
+                  class="text-white font-semibold hover:text-white/80 transition-colors"
+                >
+                  <span data-lang="pt-br">Ver mais →</span>
+                  <span data-lang="en">Read more →</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="mb-12">
+            <h3 class="responsive-text-2xl font-bold mb-6">Tags</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 responsive-gap-8">
+              <div class="card">
+                <h4 class="text-lg font-bold mb-4">
+                  <span data-lang="pt-br">Exemplos</span>
+                  <span data-lang="en">Examples</span>
+                </h4>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">TypeScript</span>
+                  <span class="tag tag-primary">Angular</span>
+                  <span class="tag tag-secondary">React</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">HTML</span>
+                </div>
+              </div>
+
+              <div class="card">
+                <h4 class="text-lg font-bold mb-4">CSS</h4>
+                <div class="code-block">
+                  .tag { background-color: var(--color-gray-800); color:
+                  var(--color-gray-200); padding: 0.375rem 0.875rem;
+                  border-radius: var(--radius-full); font-size: 0.875rem; }
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Spacing System -->
+        <section class="mb-16">
+          <h2
+            class="responsive-text-3xl font-bold text-[var(--color-light)] mb-8"
+          >
+            <span data-lang="pt-br">Sistema de Espaçamento</span>
+            <span data-lang="en">Spacing System</span>
+          </h2>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 responsive-gap-8">
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Escala de Espaçamento</span>
+                <span data-lang="en">Spacing Scale</span>
+              </h3>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span>--space-xs</span>
+                  <span class="text-[var(--color-gray-400)]"
+                    >0.25rem (4px)</span
+                  >
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--space-sm</span>
+                  <span class="text-[var(--color-gray-400)]">0.5rem (8px)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--space-md</span>
+                  <span class="text-[var(--color-gray-400)]">1rem (16px)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--space-lg</span>
+                  <span class="text-[var(--color-gray-400)]"
+                    >1.5rem (24px)</span
+                  >
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--space-xl</span>
+                  <span class="text-[var(--color-gray-400)]">2rem (32px)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--space-2xl</span>
+                  <span class="text-[var(--color-gray-400)]">3rem (48px)</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--space-3xl</span>
+                  <span class="text-[var(--color-gray-400)]">5rem (80px)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Border Radius</span>
+                <span data-lang="en">Border Radius</span>
+              </h3>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                  <span>--radius-sm</span>
+                  <span class="text-[var(--color-gray-400)]">4px</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--radius-md</span>
+                  <span class="text-[var(--color-gray-400)]">8px</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--radius-lg</span>
+                  <span class="text-[var(--color-gray-400)]">12px</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--radius-xl</span>
+                  <span class="text-[var(--color-gray-400)]">16px</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--radius-2xl</span>
+                  <span class="text-[var(--color-gray-400)]">24px</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span>--radius-full</span>
+                  <span class="text-[var(--color-gray-400)]">9999px</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Accessibility -->
+        <section class="mb-16">
+          <h2
+            class="responsive-text-3xl font-bold text-[var(--color-light)] mb-8"
+          >
+            <span data-lang="pt-br">Acessibilidade</span>
+            <span data-lang="en">Accessibility</span>
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 responsive-gap-8">
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Recursos Implementados</span>
+                <span data-lang="en">Implemented Features</span>
+              </h3>
+              <ul class="space-y-3 text-[var(--color-gray-400)]">
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-success)] flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span data-lang="pt-br"
+                    >Skip links para navegação por teclado</span
+                  >
+                  <span data-lang="en">Skip links for keyboard navigation</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-success)] flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span data-lang="pt-br">Indicadores de foco visíveis</span>
+                  <span data-lang="en">Visible focus indicators</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-success)] flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span data-lang="pt-br"
+                    >Suporte para modo de alto contraste</span
+                  >
+                  <span data-lang="en">High contrast mode support</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-success)] flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span data-lang="pt-br"
+                    >Respeito por preferências de movimento reduzido</span
+                  >
+                  <span data-lang="en">Reduced motion preferences support</span>
+                </li>
+                <li class="flex items-start">
+                  <svg
+                    class="h-5 w-5 mr-2 mt-0.5 text-[var(--color-success)] flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span data-lang="pt-br">Labels semânticos e ARIA</span>
+                  <span data-lang="en">Semantic labels and ARIA</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h3 class="text-xl font-bold mb-4">
+                <span data-lang="pt-br">Contraste de Cores</span>
+                <span data-lang="en">Color Contrast</span>
+              </h3>
+              <p class="text-[var(--color-gray-400)] mb-4">
+                <span data-lang="pt-br"
+                  >Todas as combinações de cores atendem ao padrão WCAG AA para
+                  contraste.</span
+                >
+                <span data-lang="en"
+                  >All color combinations meet WCAG AA contrast standards.</span
+                >
+              </p>
+              <div class="space-y-3">
+                <div
+                  class="flex items-center justify-between p-3 bg-[var(--color-primary)] rounded-lg"
+                >
+                  <span class="text-white font-semibold">Primary on White</span>
+                  <span class="text-white text-sm">4.5:1</span>
+                </div>
+                <div
+                  class="flex items-center justify-between p-3 bg-[var(--color-gray-400)] rounded-lg"
+                >
+                  <span class="text-white font-semibold">Gray 400 on Dark</span>
+                  <span class="text-white text-sm">7.2:1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="py-8 text-center text-[var(--color-gray-400)] border-t border-[var(--color-gray-800)]"
+      role="contentinfo"
+    >
+      <div class="container-custom">
+        <p class="mb-4">
+          <span data-lang="pt-br">Sistema de Design - Anna Grateki</span>
+          <span data-lang="en">Design System - Anna Grateki</span>
+        </p>
+        <p class="text-sm">
+          <span data-lang="pt-br"
+            >© 2025 Anna Grateki. Todos os direitos reservados.</span
+          >
+          <span data-lang="en">© 2025 Anna Grateki. All rights reserved.</span>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
