@@ -1,0 +1,10 @@
+# Remove .html extension from URLs
+/portfolio.html /portfolio 301!
+/design-system.html /design-system 301!
+
+# Pretty URLs - serve HTML files without extension
+/portfolio /portfolio.html 200
+/design-system /design-system.html 200
+
+# Fallback for index
+/ /index.html 200
