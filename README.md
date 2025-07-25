@@ -116,10 +116,11 @@ portfolio/
 O site está hospedado no Netlify com deploy automático:
 
 - **URL de produção**: [https://grateki.netlify.app](https://grateki.netlify.app)
-- **Portfolio principal**: [https://grateki.netlify.app/portfolio.html](https://grateki.netlify.app/portfolio.html)
-- **Design System**: [https://grateki.netlify.app/design-system.html](https://grateki.netlify.app/design-system.html)
+- **Portfolio principal**: [https://grateki.netlify.app/portfolio](https://grateki.netlify.app/portfolio)
+- **Design System**: [https://grateki.netlify.app/design-system](https://grateki.netlify.app/design-system)
 - **Deploy automático**: Conectado ao branch `main`
 - **DNS personalizado**: Configurado para domínio customizado
+- **URLs limpas**: Sem extensões .html para melhor UX
 
 ### Configuração DNS (Squarespace → Netlify)
 
