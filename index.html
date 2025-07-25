@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Anna Grateki - Engenheira de Software & Desenvolvedora Front-End. Portfolio pessoal com projetos e experiências profissionais."
+    />
+    <meta
+      name="keywords"
+      content="Anna Grateki, portfolio, engenheira software, desenvolvedora front-end, Angular, React, JavaScript"
+    />
+    <meta name="author" content="Anna Grateki" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://grateki.netlify.app/" />
+    <meta property="og:title" content="Anna Grateki - Portfolio" />
+    <meta
+      property="og:description"
+      content="Engenheira de Software & Desenvolvedora Front-End. Acredito que tradição e inovação devem andar juntas."
+    />
+    <meta property="og:image" content="https://grateki.netlify.app/foto.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://grateki.netlify.app/" />
+    <meta property="twitter:title" content="Anna Grateki - Portfolio" />
+    <meta
+      property="twitter:description"
+      content="Engenheira de Software & Desenvolvedora Front-End. Acredito que tradição e inovação devem andar juntas."
+    />
+    <meta
+      property="twitter:image"
+      content="https://grateki.netlify.app/foto.jpg"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>"
+    />
+
+    <title>Anna Grateki - Portfolio</title>
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="cover2.html" as="document" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://grateki.netlify.app/" />
+
+    <style>
+      /* Loading screen styles */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "FiraCode Nerd Font", "Fira Code", "Courier New", monospace;
+        background: #000000;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .loading-container {
+        text-align: center;
+        animation: fadeIn 0.5s ease-in;
+      }
+
+      .loading-text {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: #8b5cf6;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid rgba(139, 92, 246, 0.3);
+        border-top: 3px solid #8b5cf6;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .subtitle {
+        font-size: 0.9rem;
+        color: #9ca3af;
+        margin-top: 1rem;
+      }
+
+      /* Hide loading screen when redirecting */
+      .fade-out {
+        animation: fadeOut 0.3s ease-out forwards;
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading-container">
+      <div class="loading-text">Anna Grateki</div>
+      <div class="spinner"></div>
+      <div class="subtitle">Carregando portfolio...</div>
+    </div>
+
+    <script>
+      // Redirect to main portfolio page after a brief loading animation
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          document.body.classList.add("fade-out");
+          setTimeout(function () {
+            window.location.href = "cover2.html";
+          }, 300);
+        }, 1000); // 1 second loading animation
+      });
+
+      // Fallback redirect in case JavaScript is disabled
+      setTimeout(function () {
+        if (
+          window.location.pathname === "/" ||
+          window.location.pathname === "/index.html"
+        ) {
+          window.location.href = "cover2.html";
+        }
+      }, 3000); // 3 seconds fallback
+    </script>
+
+    <!-- Fallback for users with JavaScript disabled -->
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=cover2.html" />
+      <style>
+        .loading-container {
+          display: none;
+        }
+        body::after {
+          content: "Redirecionando... Se não for redirecionado automaticamente, clique aqui: ";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+        }
+        body::before {
+          content: "";
+          position: absolute;
+          top: 60%;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 200px;
+          height: 40px;
+          background: #8b5cf6;
+          border-radius: 5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          text-decoration: none;
+        }
+      </style>
+      <p
+        style="
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+        "
+      >
+        Redirecionando...<br />
+        <a
+          href="cover2.html"
+          style="
+            color: #8b5cf6;
+            text-decoration: none;
+            background: rgba(139, 92, 246, 0.1);
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+          "
+        >
+          Ir para Portfolio
+        </a>
+      </p>
+    </noscript>
+  </body>
+</html>
