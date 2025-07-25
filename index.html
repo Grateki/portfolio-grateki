@@ -136,30 +136,27 @@
     </div>
 
     <script>
-      // Redirect to main portfolio page after a brief loading animation
       window.addEventListener("load", function () {
         setTimeout(function () {
           document.body.classList.add("fade-out");
           setTimeout(function () {
-            window.location.href = "cover2.html";
+            window.location.href = "portfolio.html";
           }, 300);
-        }, 1000); // 1 second loading animation
+        }, 1000);
       });
 
-      // Fallback redirect in case JavaScript is disabled
       setTimeout(function () {
         if (
           window.location.pathname === "/" ||
           window.location.pathname === "/index.html"
         ) {
-          window.location.href = "cover2.html";
+          window.location.href = "portfolio.html";
         }
-      }, 3000); // 3 seconds fallback
+      }, 3000);
     </script>
 
-    <!-- Fallback for users with JavaScript disabled -->
     <noscript>
-      <meta http-equiv="refresh" content="0; url=cover2.html" />
+      <meta http-equiv="refresh" content="0; url=portfolio.html" />
       <style>
         .loading-container {
           display: none;
@@ -200,7 +197,7 @@
       >
         Redirecionando...<br />
         <a
-          href="cover2.html"
+          href="portfolio.html"
           style="
             color: #8b5cf6;
             text-decoration: none;

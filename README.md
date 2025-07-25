@@ -1,7 +1,12 @@
 # 🚀 Anna Grateki - Portfolio
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/8daf72a6-2f18-7e2d-9a7a-a4491e444882/deploy-status)](https://app.netlify.com/sites/grateki/deploys)
-[![Live Demo](https://img.shields.io/badge/Live-Demo-blue?style=flat&logo=netlify)](https://grateki.netlify.app)
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-Live-brightgreen?style=for-the-badge)](https://grateki.netlify.app)
+[![GitHub](https://img.shields.io/badge/📂_Source-GitHub-black?style=for-the-badge&logo=github)](https://github.com/Grateki/portfolio-grateki)
+
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Netlify](https://img.shields.io/badge/Netlify-00AD9F?style=flat&logo=netlify&logoColor=white)
 
 > Portfólio pessoal de Anna Grateki - Engenheira de Software & Desenvolvedora Front-End
 
@@ -28,7 +33,7 @@ Este é meu portfólio pessoal, desenvolvido com foco em acessibilidade, perform
 
 ## 🎨 Design System
 
-O projeto inclui um design system completo (`designsystem.html`) que documenta:
+O projeto inclui um design system completo (`design-system.html`) que documenta:
 
 - 🎨 Paleta de cores padronizada
 - 📝 Tipografia e escalas
@@ -72,8 +77,9 @@ http-server
 
 ```
 portfolio/
-├── cover2.html          # Página principal do portfólio
-├── designsystem.html    # Documentação do design system
+├── index.html           # Página de entrada com redirecionamento
+├── portfolio.html       # Página principal do portfólio
+├── design-system.html   # Documentação do design system
 ├── foto.jpg            # Foto profissional
 ├── tailwind.config.js  # Configurações do Tailwind
 └── README.md           # Este arquivo
@@ -110,6 +116,8 @@ portfolio/
 O site está hospedado no Netlify com deploy automático:
 
 - **URL de produção**: [https://grateki.netlify.app](https://grateki.netlify.app)
+- **Portfolio principal**: [https://grateki.netlify.app/portfolio.html](https://grateki.netlify.app/portfolio.html)
+- **Design System**: [https://grateki.netlify.app/design-system.html](https://grateki.netlify.app/design-system.html)
 - **Deploy automático**: Conectado ao branch `main`
 - **DNS personalizado**: Configurado para domínio customizado
 
